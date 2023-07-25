@@ -51,7 +51,7 @@ import tqdm
 import uptime
 # Use below library for Test mode(--tmode) if necessary. 
 # https://ja.manuals.plus/fnirsi/dc6006l-cnc-dc-adjustable-power-supply-manual
-from dc6006l import *
+#from dc6006l import *
 
 def parse_cli(open_browser=True):
     parser = argparse.ArgumentParser(
