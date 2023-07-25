@@ -6,7 +6,7 @@ set TOOL_DIR=../src/
 set MODEL="A552"
 set EXEC=
 
-echo CAN Python Logger & Save configuration tool Start!!
+echo CAN Python Log configuration tool Start!!
 set /p CONF="Config(conf_can.txt for detail) update? (y/n) > "
 if "%CONF%"=="y" (
     CALL Input_conf_can.bat 

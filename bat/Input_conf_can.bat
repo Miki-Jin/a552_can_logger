@@ -50,16 +50,14 @@ set /P DRATE="DRATE? (Hz) > "
 if "%DRATE%"=="" goto :INPUT_DRATE
 echo DRATE=%DRATE% >> conf_can.txt
 
-rem :INPUT_FILTER
-rem set FILTER=
-rem set /P FILTER="Filter setting(choose from 'MV_AVG0', 'MV_AVG2', 'MV_AVG4', 'MV_AVG8', 'MV_AVG16', 'MV_AVG32', 'MV_AVG64', 'MV_AVG128', 'K32_FC50', 'K32_FC100', 'K32_FC200', 'K32_FC400', 'K64_FC50', 'K64_FC100', 'K64_FC200', 'K64_FC400', 'K128_FC50', 'K128_FC100', 'K128_FC200', 'K128_FC400')? > "
-rem if "%FILTER%"=="" goto :INPUT_FILTER
-rem echo FILTER=%FILTER% >> conf_can.txt
+:INPUT_FILTER
+set FILTER=
+set /P FILTER="Filter setting(choose from 'K64_FC83', 'K64_FC220', 'K128_FC36', 'K128_FC110', 'K128_FC350', 'K512_FC9','K512_FC16', 'K512_FC60', 'K512_FC210','K512_FC460')? > "
+echo FILTER=%FILTER% >> conf_can.txt
 
 :INPUT_SYNC
 set SYNC=
 set /P SYNC="Sync mode?(y/n) > "
-if "%SYNC%"=="" goto :INPUT_SYNC
 if "%SYNC%"=="y" (
     set SYNC=--sync_hz
 ) else (
