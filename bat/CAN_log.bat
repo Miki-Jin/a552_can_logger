@@ -25,12 +25,12 @@ if %MODEL% equ 0 (
 )
 
 if "%~1"=="" (
-    python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
+    python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
 ) else (
     rem
     @echo off
     FOR %%a IN (%*) do (
-        python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
+        python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
     )
 )
 @echo on

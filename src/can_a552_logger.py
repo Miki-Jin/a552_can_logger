@@ -738,6 +738,12 @@ def main():
         hb_msg = 0
         hb1_num = 0
         hb2_num = 0
+
+        if args.tempc:
+            rd3=sdo_read(bus,4,0x1802,1)
+            rd3=rd3 & ~0x80000000
+            sdo_write(bus,4,0x1802,1,rd3)
+
         rd1=sdo_read(bus,4,0x1800,1)
         rd2=sdo_read(bus,4,0x1801,1)
         rd3=sdo_read(bus,4,0x1802,1)
