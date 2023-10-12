@@ -6,7 +6,7 @@ REM 設定ファイルパス
 set CONFFILE=./conf_can.txt
 
 :INPUT_INTERFACE
-set INTERFACE=
+set INTERFACE=pcan
 set /p INTERFACE= "CAN INTERFACE ADAPTER? (default=pcan) > "
 echo INTERFACE=%INTERFACE% > conf_can.txt
 rem set /p CHANNEL= "CAN CHANNEL No?  (can1 or can2) > "
@@ -16,7 +16,7 @@ if "%INTERFACE%"=="pcan" (
     set /p CHANNEL= "CAN CHANNEL No?  (can1 or can2) > " 
     rem echo CHANNEL=%CHANNEL% >> conf_can.txt
 ) else (
-    set CHANNEL=
+    set /p CHANNEL= "CAN CHANNEL No? > " 
 )
 echo CHANNEL=%CHANNEL% >> conf_can.txt
 :INPUT_MODEL
@@ -30,12 +30,28 @@ set BITRATE=
 set /P BITRATE="CAN bitarate ? > "
 if "%BITRATE%"=="" goto :INPUT_BITRATE
 echo BITRATE=%BITRATE% >> conf_can.txt
+set BITRATE_NEW=
+set /P BITRATE_NEW="Change bitrate?(y/n) > "
+if "%BITRATE_NEW%"=="y" (
+    set /P BITRATE_NEW="New bitarate ?(Valid after save & reboot..) > "
+) else (
+    set BITRATE_NEW=-%BITRATE%
+)
+echo BITRATE_NEW=%BITRATE_NEW% >> conf_can.txt
 
 :INPUT_NODEID
 set NODEID=
 set /P NODEID="Node ID ? > "
 if "%NODEID%"=="" goto :INPUT_NODEID
 echo NODEID=%NODEID% >> conf_can.txt
+set NODEID_NEW=
+set /P NODEID_NEW="Change Node ID?(y/n) > "
+if "%NODEID_NEW%"=="y" (
+    set /P NODEID_NEW="New Node ID ?(Valid after save & reboot..) > "
+) else (
+    set NODEID_NEW=-%NODEID%
+)
+echo NODEID_NEW=%NODEID_NEW% >> conf_can.txt
 
 :INPUT_SAMPLE
 set SAMPLE=
@@ -51,7 +67,7 @@ echo DRATE=%DRATE% >> conf_can.txt
 
 :INPUT_FILTER
 set FILTER=
-set /P FILTER="Filter setting(choose from 'K64_FC83', 'K64_FC220', 'K128_FC36', 'K128_FC110', 'K128_FC350', 'K512_FC9','K512_FC16', 'K512_FC60', 'K512_FC210','K512_FC460')? > "
+rem set /P FILTER="Filter setting(N/A)? > "
 echo FILTER=%FILTER% >> conf_can.txt
 
 :INPUT_SYNC

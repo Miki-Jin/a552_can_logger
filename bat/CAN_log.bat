@@ -17,21 +17,13 @@ echo CAN BITRATE is %BITRATE%!!
 rem echo %DRATE%
 set EXEC=can_a552_logger.py
 
-rem if %MODEL% equ 0 (
-rem     set EXEC=can_a552_logger.py
-rem ) else if %MODEL% equ 1 (
-rem     set EXEC=
-rem ) else if %MODEL% equ 2 (
-rem     set EXEC=
-rem )
-
 if "%~1"=="" (
-    python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
+    python %TOOL_DIR%%EXEC% -b %BITRATE% --bitrate_new %BITRATE_NEW% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --can_id_new %NODEID_NEW% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
 ) else (
     rem
     @echo off
     FOR %%a IN (%*) do (
-        python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
+        python %TOOL_DIR%%EXEC% -b %BITRATE% --bitrate_new %BITRATE_NEW% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --can_id_new %NODEID_NEW% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 
     )
 )
 @echo on

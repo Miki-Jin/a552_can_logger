@@ -94,7 +94,21 @@ def parse_cli(open_browser=True):
     default=1000000,
     )
     parser.add_argument(
+    "--bitrate_new",
+    help="specifies the CAN bitrate, \
+            default is 1000000",
+    type=int,
+    default=1000000,
+    )
+    parser.add_argument(
     "--can_id",
+    help="specifies CAN ID of the IMU which must be between, \
+            1 ~ 127, default is 1",
+    type=int,
+    default=1,
+    )
+    parser.add_argument(
+    "--can_id_new",
     help="specifies CAN ID of the IMU which must be between, \
             1 ~ 127, default is 1",
     type=int,
@@ -349,7 +363,16 @@ DRATE_SEL2 = {
     "10": 0x0a,
     "50": 0x32,
 }
-
+BRATE_SEL = {
+    '1000000':    0x00,
+    '800000':    0x01,
+    '500000':   0x02,
+    '250000':   0x03,
+    '125000':  0x04,
+    '50000':  0x05,
+    '20000':    0x06,
+    '10000':   0x07,
+}
 # CAN message ID field
 cob_id = {
     "NMT": 0x000,
@@ -1042,13 +1065,20 @@ def apply_param(bus_,dat):
 
 def filter_set(bus_,dat,model):
     if model[:1] in('A'):
-		param=FILTER_SEL_ACC[dat]
+        param=FILTER_SEL_ACC[dat]
     elif model[:7] in ('G552PC7'):
-		param=FILTER_SEL2[dat] 
+        param=FILTER_SEL2[dat] 
     else:
         param=FILTER_SEL[dat]
     sdo_write(bus_,1,0x61A1,0x01,param)
     time.sleep(3)
+
+def brate_set(bus_,dat):
+    param=BRATE_SEL[dat]
+    sdo_write(bus_,1,0x2000,0x02,param)
+
+def canid_set(bus_,dat):
+    sdo_write(bus_,1,0x2000,0x01,dat)
 
 def debug():
     can_ports(args)
@@ -1113,6 +1143,12 @@ def main(arg):
         print('MODEL:\t'+model)
         print('VER:\t'+ver)
         print('S/N:\t'+SNum)
+    
+        if not (args.can_id == args.can_id_new) :
+            canid_set(bus,args.can_id_new)
+
+        if not (args.bitrate == args.bitrate_new) :
+            brate_set(bus,str(args.bitrate_new))
 
         # Generate filename tag based on specified settings for file management
         if model[:1] in ('A'):

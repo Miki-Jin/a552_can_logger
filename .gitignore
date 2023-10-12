@@ -1,2 +1,6 @@
-Bat/*.csv
+bat/*.csv
+bat/*.txt
+sh/*.csv
+sh/*.txt
 src/venv
+src/*.txt
