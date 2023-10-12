@@ -15,14 +15,15 @@ CALL read_conf_can.bat
 
 echo CAN BITRATE is %BITRATE%!!  
 rem echo %DRATE%
+set EXEC=can_a552_logger.py
 
-if %MODEL% equ 0 (
-    set EXEC=can_a552_logger.py
-) else if %MODEL% equ 1 (
-    set EXEC=
-) else if %MODEL% equ 2 (
-    set EXEC=
-)
+rem if %MODEL% equ 0 (
+rem     set EXEC=can_a552_logger.py
+rem ) else if %MODEL% equ 1 (
+rem     set EXEC=
+rem ) else if %MODEL% equ 2 (
+rem     set EXEC=
+rem )
 
 if "%~1"=="" (
     python %TOOL_DIR%%EXEC% -b %BITRATE% %CSV% %SYNC% %DRATE% %TEMPC% --can_id %NODEID% --m %SAMPLE% -i %INTERFACE% -c %CHANNEL% %SAVECFG% 

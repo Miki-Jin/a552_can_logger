@@ -7,8 +7,7 @@ set CONFFILE=./conf_can.txt
 
 :INPUT_INTERFACE
 set INTERFACE=
-set /p INTERFACE= "CAN INTERFACE ADAPTER? (pcan/nixnet/) > "
-if "%INTERFACE%"=="" goto :INPUT_INTERFACE
+set /p INTERFACE= "CAN INTERFACE ADAPTER? (default=pcan) > "
 echo INTERFACE=%INTERFACE% > conf_can.txt
 rem set /p CHANNEL= "CAN CHANNEL No?  (can1 or can2) > "
 if "%INTERFACE%"=="pcan" (
@@ -17,7 +16,7 @@ if "%INTERFACE%"=="pcan" (
     set /p CHANNEL= "CAN CHANNEL No?  (can1 or can2) > " 
     rem echo CHANNEL=%CHANNEL% >> conf_can.txt
 ) else (
-    set CHANNEL=PCAN_USBBUS2
+    set CHANNEL=
 )
 echo CHANNEL=%CHANNEL% >> conf_can.txt
 :INPUT_MODEL
@@ -68,7 +67,6 @@ echo SYNC=%SYNC% >> conf_can.txt
 :INPUT_CSV
 set CSV=
 set /P CSV="csv? (y/n)> "
-if "%CSV%"=="" goto :INPUT_CSV
 if "%CSV%"=="--outfile" (
     set CSV=--csv
 ) else (
@@ -79,7 +77,6 @@ echo CSV=%CSV% >> conf_can.txt
 :INPUT_TEMPC
 set TEMPC=
 set /P TEMPC="temperature output? (y/n)> "
-if "%TEMPC%"=="" goto :INPUT_TEMPC
 if "%TEMPC%"=="y" (
     set TEMPC=--tempc
 ) else (
@@ -90,7 +87,6 @@ echo TEMPC=%TEMPC% >> conf_can.txt
 :INPUT_NOSCALE
 set NOSCALE=
 set /P NOSCALE="Scaled data output? (y/n)> "
-if "%NOSCALE%"=="" goto :INPUT_NOSCALE
 if "%NOSCALE%"=="y" (
     set NOSCALE=
 ) else (
@@ -101,7 +97,6 @@ echo NOSCALE=%NOSCALE% >> conf_can.txt
 :INPUT_SAVECFG
 set SAVECFG=
 set /P SAVECFG="Configuration save ? (y/n)> "
-if "%SAVECFG%"=="" goto :INPUT_NOSCALE
 if "%SAVECFG%"=="y" (
     set SAVECFG=--svcfg
 ) else (
