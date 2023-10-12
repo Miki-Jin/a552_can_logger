@@ -49,7 +49,7 @@ set /P NODEID_NEW="Change Node ID?(y/n) > "
 if "%NODEID_NEW%"=="y" (
     set /P NODEID_NEW="New Node ID ?(Valid after save & reboot..) > "
 ) else (
-    set NODEID_NEW=-%NODEID%
+    set NODEID_NEW=%NODEID%
 )
 echo NODEID_NEW=%NODEID_NEW% >> conf_can.txt
 
